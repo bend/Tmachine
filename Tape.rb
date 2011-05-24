@@ -19,7 +19,7 @@ class Tape
 			current.setNext(node)
 			@current = node
 		end
-		@current = head	
+		@current = head.next
 	end
 
 	def putSymbol(s)
@@ -62,22 +62,3 @@ class Tape
 
 end
 
-t = Tape.new
-t.fillTape("abcdefghijkl")
-puts t.toString
-puts t.getUnderCur
-t.rightMove
-puts t.getUnderCur
-
-t.rightMove
-puts t.getUnderCur
-t.rightMove
-puts t.getUnderCur
-t.rightMove
-puts t.getUnderCur
-t.rightMove
-puts t.getUnderCur
-t.leftMove
-puts t.getUnderCur
-t.leftMove
-puts t.getUnderCur
