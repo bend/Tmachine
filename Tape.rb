@@ -1,29 +1,40 @@
 #!/usr/local/bin/ruby
 require 'Node.rb'
+require 'Exception.rb'
 
 class Tape 
 
 	attr_accessor :current
 	attr_accessor :head
+	attr_reader	  :alphabet
 
-	def initialize
+	def initialize(alph)
 		@head= Node.new
 		head.setElem(EMPTY)
 		@current = head
+		@alphabet = alph
 	end
 
 	def fillTape(init)
 		init.each_char do |e|
-			node = Node.new
-			node.setElem(e)
-			current.setNext(node)
-			@current = node
+			if alphabet.include? e
+				node = Node.new
+				node.setElem(e)
+				current.setNext(node)
+				@current = node
+			else
+				raise SymbolException.new( 'Symbol not in alphabet')
+			end
 		end
 		@current = head.next
 	end
 
 	def putSymbol(s)
-		current.setElem(s)
+		if alphabet.include? s
+			current.setElem(s)
+		else 
+			raise SymbolException.new( 'Symbol not in alphabet')
+		end
 	end
 
 	def leftMove

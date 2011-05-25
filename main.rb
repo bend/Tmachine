@@ -6,12 +6,10 @@ r = ['START','0','CONT','B','->',
 	 'CONT' ,'0','CONT','0','->',
 	 'CONT' ,'B','STOP','0','<>',
 	]
-init = '001101101'
+init = '0011100001010101010010101011001110100000'
 puts init
-alp = '0B'
+alp = '012B'
 
 tm = Tmachine.new(alp, init, r)
 tm.start()
-print tm.tape.toString()
-puts ''
 

@@ -2,6 +2,7 @@
 require 'Tape.rb'
 require 'Rules.rb'
 require 'Global.rb'
+require 'Exception.rb'
 
 class Tmachine
 
@@ -11,21 +12,26 @@ class Tmachine
 	attr_reader :currentState
 
 	def initialize(alphabet, initialState, r)
-		@h= alphabet
+		@alphabet= alphabet
 		puts 'parsing rules'
 		@rules = Rules.new(r)
 		puts '+-------------------+'
 		puts '| initializing tape |'
 		puts '+-------------------+'
-		@tape = Tape.new
+		@tape = Tape.new(alphabet)
 		puts '+-------------------+'
 		puts '|    filling tape   |'
 		puts '+-------------------+'
-		tape.fillTape(initialState)
+		begin
+			tape.fillTape(initialState)
+		rescue SymbolException 
+			puts 'FATAL: Symbol not in alphabet'
+			exit
+		end
 		puts '+-------------------+'
 		puts '|    initial tape   |'
 		puts '+-------------------+'
-		print tape.toString
+		printTape(tape.toString)
 		puts ''
 		puts ''
 		@currentState = STATE_START
@@ -40,7 +46,10 @@ class Tmachine
 			puts '| Reading Symbol: '+tape.getUnderCur
 			arr = rules.applyRule(currentState, tape.getUnderCur)
 			if arr == nil 
-				puts 'No rules found'
+				puts 'FATAL: No rules found'
+				puts 'STOPPED ON ITERATION '+iter.to_s
+				puts '	WITH STATE '+currentState
+				puts '	WITH SYMBOL '+tape.getUnderCur
 				return
 			end
 			puts '+--------------------------'
@@ -49,17 +58,22 @@ class Tmachine
 			puts '|	new symbol	: '+ arr[POS_SYM]
 			puts '|	move		: '+ arr[POS_MOVE]
 			@currentState = arr[POS_STATE] 	# new state
-			tape.putSymbol(arr[POS_SYM])
+			begin 
+				tape.putSymbol(arr[POS_SYM])
+			rescue
+				puts 'FATAL: Symbol not in alphabet'
+				exit
+			end
 			case arr[POS_MOVE]
 			when SHIFT_RIGHT:
 				tape.rightMove
 			when SHIFT_LEFT:
 				tape.leftMove
 			end
-			puts '+--------------------------'
-			puts '| Tape @iteration '+iter.to_s
+			puts  '+--------------------------'
+			puts  '| Tape @iteration '+iter.to_s
 			print '|	'
-			print tape.toString
+			printTape(tape.toString)
 			puts ''
 			iter+=1
 			puts '+--------------------------'
@@ -67,13 +81,21 @@ class Tmachine
 		end
 		puts '+--------------------------'
 		puts '| Final tape:'
-		print tape.toString
+		print '|	'
+		printTape(tape.toString)
 		puts '|	'
 		puts '+--------------------------'
 		puts '| Number of iterations: ' + iter.to_s
 		puts '+--------------------------'
 	end
-		
+
+	def printTape(strTape)
+		strTape.each do |e|
+			print e
+			print ' | '
+		end
+		puts ''
+	end
 end
 
 
