@@ -14,15 +14,14 @@ class Tmachine
 		@rules = Rules.new(r)
 		@tape = Tape.new
 		tape.fillTape(initialState)
-		currentState = 'START'
+		@currentState = 'START'
 	end
 
 	def start()
 		while currentState != 'STOP'
-			puts rules.rules['CONTINUE']
 			arr = rules.applyRule(currentState, tape.getUnderCur)
-			currentState = arr[0] 	# new state
-			tape.setElem(arr[1])
+			@currentState = arr[0] 	# new state
+			tape.putSymbol(arr[1])
 			if arr[2] =='->'
 				tape.rightMove
 			elsif arr[2] =='<-'
@@ -35,11 +34,13 @@ class Tmachine
 end
 
 
+r = ['START','0','CONT','b','->',
+	 'CONT' ,'0','CONT','c','->',
+	 'STOP' ,'0','STOP','d','<>']
+
 init = '0000000000000000'
 alp = '0B'
-rules = ['START'	,'0',	'CONTINUE',	'1',	'->', 
-		'CONTINUE'	,'0',	'CONTINUE', '1',	'->', 
-		'CONTINUE'	, '', 	'STOP',		'0',    '<>']
-tm = Tmachine.new(alp, init, rules)
+
+tm = Tmachine.new(alp, init, r)
 tm.start()
 

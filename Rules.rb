@@ -19,7 +19,6 @@ private
 	# Hash(State, Hash(symbol, Array[State,Sym,mode]))
 	# Rules are received with format array[State,Sym...]
 	def parseRules(r)
-		puts 1
 		for i in 0..r.length do
 			if i%5 ==0	# State
 				state = r[i]
@@ -38,7 +37,6 @@ private
 				else
 					rules[state][sym] = arr
 				end
-				i+=3
 			end
 		end
 
