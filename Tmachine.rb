@@ -1,6 +1,7 @@
 #!/usr/local/bin/ruby
 require 'Tape.rb'
 require 'Rules.rb'
+require 'Global.rb'
 
 class Tmachine
 
@@ -14,17 +15,18 @@ class Tmachine
 		@rules = Rules.new(r)
 		@tape = Tape.new
 		tape.fillTape(initialState)
-		@currentState = 'START'
+		@currentState = STATE_START
 	end
 
 	def start()
-		while currentState != 'STOP'
+		while currentState != STATE_STOP
 			arr = rules.applyRule(currentState, tape.getUnderCur)
-			@currentState = arr[0] 	# new state
-			tape.putSymbol(arr[1])
-			if arr[2] =='->'
+			@currentState = arr[POS_STATE] 	# new state
+			tape.putSymbol(arr[POS_SYM])
+			case arr[POS_MOVE]
+			when SHIFT_RIGHT:
 				tape.rightMove
-			elsif arr[2] =='<-'
+			when SHIFT_LEFT:
 				tape.leftMove
 			end
 		end

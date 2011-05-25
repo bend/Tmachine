@@ -27,9 +27,9 @@ private
 				newSym = r[i+3]
 				move = r[i+4]
 				arr = []
-				arr.push(newState)
-				arr.push(newSym)
-				arr.push(move)
+				arr[POS_STATE] = newState
+				arr[POS_SYM] = newSym
+				arr[POS_MOVE]  = move
 				if rules[state] == nil
 					hash = {}
 					hash[sym] = arr
@@ -37,9 +37,9 @@ private
 				else
 					rules[state][sym] = arr
 				end
+				i+=4
 			end
 		end
-
 	end
 
 end
