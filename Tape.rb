@@ -8,7 +8,7 @@ class Tape
 
 	def initialize
 		@head= Node.new
-		head.setElem('')
+		head.setElem(EMPTY)
 		@current = head
 	end
 
@@ -33,6 +33,7 @@ class Tape
 			node = Node.new
 			node.setNext(current)
 			@current = node
+			@head = current
 		end
 	end
 	
@@ -51,7 +52,7 @@ class Tape
 	end
 
 	def toString
-		cur = head
+		cur = head.next
 		str_buf=[]
 		while cur != nil && cur.elem != nil
 			str_buf.push(cur.elem)
