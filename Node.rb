@@ -11,7 +11,7 @@ public
 	def initialize
 		@next = nil
 		@prev = nil
-		@elem = nil
+		@elem = 'B'
 	end
 
 	def setNext(node)

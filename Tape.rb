@@ -53,7 +53,7 @@ class Tape
 	def toString
 		cur = head
 		str_buf=""
-		while cur != nil
+		while cur != nil && cur.elem != nil
 			str_buf+=cur.elem
 			cur = cur.next
 		end
