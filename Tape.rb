@@ -52,9 +52,9 @@ class Tape
 
 	def toString
 		cur = head
-		str_buf=""
+		str_buf=[]
 		while cur != nil && cur.elem != nil
-			str_buf+=cur.elem
+			str_buf.push(cur.elem)
 			cur = cur.next
 		end
 		return str_buf

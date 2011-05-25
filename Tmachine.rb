@@ -27,7 +27,6 @@ class Tmachine
 			elsif arr[2] =='<-'
 				tape.leftMove
 			end
-			puts tape.toString
 		end
 	end
 		
@@ -36,11 +35,13 @@ end
 
 r = ['START','0','CONT','b','->',
 	 'CONT' ,'0','CONT','c','->',
-	 'CONT' ,'B','STOP','B','<>',
+	 'CONT' ,'B','STOP','B','->',
 	]
 init = '00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
 alp = '0B'
 
 tm = Tmachine.new(alp, init, r)
 tm.start()
+print tm.tape.toString()
+puts ''
 
