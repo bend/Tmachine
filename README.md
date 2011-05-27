@@ -1,11 +1,11 @@
 #Tmachine
 A fully fonctional turing machine written in RUBY. The machine shows the state, symbol and tape  at each transition.
 ##Implementation
-The program is built with multiple classes in order to make it more modular
-* The Tmachine class contains the code that do the transition
-* The Tape class contains all the code related to the tape
-* The Rule and Loader class contains the code for parsing the rules from the file and searching for the rules
-* The Printer class deals with the prints and can print also in file.
+The program is built with multiple classes in order to make it more modular:
+*	The Tmachine class contains the code that do the transition
+* 	The Tape class contains all the code related to the tape
+* 	The Rule and Loader class contains the code for parsing the rules from the file and searching for the rules
+*	The Printer class deals with the prints and can print also in file.
 ##Usage
 To use the machine type ruby main.rb [filename.tm]. The filename.tm will contain the code that the turing machine will interpret
 ##Programming the Tmachine
