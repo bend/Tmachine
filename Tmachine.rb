@@ -3,6 +3,7 @@ require 'Tape.rb'
 require 'Rules.rb'
 require 'Global.rb'
 require 'Exception.rb'
+require 'Printer.rb'
 
 class Tmachine
 
@@ -10,58 +11,49 @@ class Tmachine
 	attr_reader :rules
 	attr_reader :tape
 	attr_reader :currentState
+	attr 		:printer
 
 	def initialize(alphabet, initialState, r)
 		@alphabet= alphabet
-		puts 'parsing rules'
+		@printer = Printer.new("/dev/stdout")
+		printer.print('Parsing rules\n',INFO)
 		@rules = Rules.new(r)
-		puts '+-------------------+'
-		puts '| initializing tape |'
-		puts '+-------------------+'
+		printer.print('Initializing tape',INFO)
 		@tape = Tape.new(alphabet)
-		puts '+-------------------+'
-		puts '|    filling tape   |'
-		puts '+-------------------+'
+		printer.print('Filling tape',INFO)
 		begin
 			tape.fillTape(initialState)
 		rescue SymbolException 
-			puts 'FATAL: Symbol not in alphabet'
+			printer.print('Symbol not in alphabet',WARNING)
 			exit
 		end
-		puts '+-------------------+'
-		puts '|    initial tape   |'
-		puts '+-------------------+'
-		printTape(tape.toString)
-		puts ''
-		puts ''
+		printer.print('Initial tape',STATUS)
+		printer.print(tape.toString,TAPE)
 		@currentState = STATE_START
 	end
 
 	def start()
 		iter = 0
 		while currentState != STATE_STOP
-			puts '+--------------------------'
-			puts '| Current state : '+currentState
-			puts '+--------------------------'
-			puts '| Reading Symbol: '+tape.getUnderCur
+			printer.print("Current state : "+currentState, STATUS)
+			printer.print("Reading Symbol: "+tape.getUnderCur,STATUS)
 			arr = rules.applyRule(currentState, tape.getUnderCur)
 			if arr == nil 
-				puts 'FATAL: No rules found'
-				puts 'STOPPED ON ITERATION '+iter.to_s
-				puts '	WITH STATE '+currentState
-				puts '	WITH SYMBOL '+tape.getUnderCur
+				printer.print("No rules found",WARNING)
+				printer.print("STOPPED ON ITERATION "+iter.to_s, WARNING)
+				printer.print("WITH STATE "+currentState,WARNING)
+				printer.print("WITH SYMBOL"+tape.getUnderCur,WARNING)
 				return
 			end
-			puts '+--------------------------'
-			puts '| Applying rules :' 
-			puts '|	new state	: '+ arr[POS_STATE]
-			puts '|	new symbol	: '+ arr[POS_SYM]
-			puts '|	move		: '+ arr[POS_MOVE]
+			printer.print("Applying rules :",STATUS)
+			printer.print("	new state	: "+ arr[POS_STATE],STATUS)
+			printer.print("	new symbol	: "+ arr[POS_SYM],STATUS)
+			printer.print("	move		: "+ arr[POS_MOVE],STATUS)
 			@currentState = arr[POS_STATE] 	# new state
 			begin 
 				tape.putSymbol(arr[POS_SYM])
 			rescue
-				puts 'FATAL: Symbol not in alphabet'
+				printer.print("Symbol not in alphabet",WARNING)
 				exit
 			end
 			case arr[POS_MOVE]
@@ -70,31 +62,13 @@ class Tmachine
 			when SHIFT_LEFT:
 				tape.leftMove
 			end
-			puts  '+--------------------------'
-			puts  '| Tape @iteration '+iter.to_s
-			print '|	'
-			printTape(tape.toString)
-			puts ''
+			printer.print("Tape @iteration "+iter.to_s,STATUS)
+			printer.print(tape.toString,TAPE)
 			iter+=1
-			puts '+--------------------------'
-			puts ''
 		end
-		puts '+--------------------------'
-		puts '| Final tape:'
-		print '|	'
-		printTape(tape.toString)
-		puts '|	'
-		puts '+--------------------------'
-		puts '| Number of iterations: ' + iter.to_s
-		puts '+--------------------------'
-	end
-
-	def printTape(strTape)
-		strTape.each do |e|
-			print e
-			print ' | '
-		end
-		puts ''
+		printer.print("Final tape:",TAPE)
+		printer.print(tape.toString,Tape)
+		printer.print("Number of iterations: " + iter.to_s,STATUS)
 	end
 end
 
