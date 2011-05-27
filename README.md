@@ -11,10 +11,10 @@ To use the machine type ruby main.rb [filename.tm]. The filename.tm will contain
 ##Programming the Tmachine
 The Tmachine is really easy to program
 Create a file and put the rules, alphabet and the initial tape in it following this syntax
-	TAPE=>PUT_HERE_THE_INITIAL_TAPE
-	RULE=>STATE SYMBOL NEWSTATE NEW SYMBOL MOVE
-		YOU CAN PUT AS MANY RULES AS YOU WISH
-	ALPH=>PUT_HERE_THE_ALPHABET
+		TAPE=>PUT_HERE_THE_INITIAL_TAPE
+		RULE=>STATE SYMBOL NEWSTATE NEW SYMBOL MOVE
+			YOU CAN PUT AS MANY RULES AS YOU WISH
+		ALPH=>PUT_HERE_THE_ALPHABET
 You can define the START STOP and movement symbols in Global.rb
 
 For examples see the examples folder.
