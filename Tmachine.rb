@@ -16,7 +16,12 @@ class Tmachine
 	def initialize(path)
 		@printer = Printer.new("/dev/stdout")
 		printer.print("Loading file",INFO)
+		begin
 			@loader = Loader.new(path)
+		rescue ParseException => e
+			printer.print(e.message,WARNING)
+			exit
+		end
 		printer.print("Parsing rules",INFO)
 		@theRules = Rules.new(loader.rules)
 		printer.print("Initializing tape",INFO)
@@ -24,8 +29,8 @@ class Tmachine
 		printer.print("Filling tape",INFO)
 		begin
 			tape.fillTape(loader.tape)
-		rescue SymbolException 
-			printer.print("Symbol not in alphabet",WARNING)
+		rescue SymbolException => e
+			printer.print(e.message,WARNING)
 			exit
 		end
 		printer.print("Initial tape",STATUS)
@@ -39,6 +44,7 @@ class Tmachine
 			printer.print("Current state : "+currentState, STATUS)
 			printer.print("Reading Symbol: "+tape.getUnderCur,STATUS)
 			arr = theRules.applyRule(currentState, tape.getUnderCur)
+
 			if arr == nil 
 				printer.print("No rules found",WARNING)
 				printer.print("STOPPED ON ITERATION "+iter.to_s, WARNING)
@@ -53,8 +59,8 @@ class Tmachine
 			@currentState = arr[POS_STATE] 	# new state
 			begin 
 				tape.putSymbol(arr[POS_SYM])
-			rescue
-				printer.print("Symbol not in alphabet",WARNING)
+			rescue SymbolException => e
+				printer.print(e.message,WARNING)
 				exit
 			end
 			case arr[POS_MOVE]

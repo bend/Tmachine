@@ -1,6 +1,11 @@
 #!/usr/local/bin/ruby
 require 'Tmachine.rb'
-tm = Tmachine.new('test.tm')
-# start the tmachine
-tm.start()
+if ARGV.length>0
+	tm = Tmachine.new(ARGV[0])
+	# start the tmachine
+	tm.start()
+else
+	puts 'USAGE: main filename'
+end
+
 

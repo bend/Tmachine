@@ -10,9 +10,13 @@ class Loader
 		@rules = []
 		File.open(path).each do |line|
 			if line.length == 1
-				return
+				next
 			end
-			r = line.rindex(';') - 1
+			begin
+				r = line.rindex(';') - 1
+			rescue
+				raise ParseException.new("Syntax error near \' "+line+" \', ';' Expected")
+			end
 			if line =~ /^TAPE=>/
 				if tape == nil
 					@tape = line[6..r]
@@ -28,16 +32,22 @@ class Loader
 					raise ParseException.new("multiple alphabet found")
 				end
 			else
-				raise ParseException.new("Syntax error")
+				raise ParseException.new("Syntax error near \'" + line +" \'")
 			end
-			
+		end
+		if alphabet == nil or alphabet == ''
+			raise ParseException.new("No alphabet found in this file")
+		elsif tape == nil or tape == ''
+			raise ParseException.new("No tape found in this file")
+		elsif rules.length < 5
+			raise ParseException.new("No rules found in this file")
 		end
 	end
 
 	def parseRule(rule)
 		r = rule.split(' ')
 		if r.length != 5
-			raise ParseException.new("Syntax error")
+			raise ParseException.new("Syntax error near \'" + rule + " \'")
 		else
 			r.each do |e|
 				rules.push(e)

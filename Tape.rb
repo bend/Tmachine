@@ -23,7 +23,7 @@ class Tape
 				current.setNext(node)
 				@current = node
 			else
-				raise SymbolException.new( 'Symbol not in alphabet')
+				raise SymbolException.new("Symbol \'" + e + "\' not in alphabet")
 			end
 		end
 		@current = head.next
@@ -33,7 +33,7 @@ class Tape
 		if alphabet.include? s.to_s
 			current.setElem(s)
 		else 
-			raise SymbolException.new( 'Symbol not in alphabet')
+			raise SymbolException.new( "Symbol \'" + e + "\' not in alphabet")
 		end
 	end
 

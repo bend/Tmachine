@@ -10,7 +10,11 @@ class Rules
 	end
 
 	def applyRule(state, symbol)
-		return rules[state][symbol]
+		begin 
+			return rules[state][symbol]
+		rescue
+			return nil
+		end
 	end
 
 private

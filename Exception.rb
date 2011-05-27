@@ -15,3 +15,4 @@ class ParseException < Exception
 		@message = msg
 	end
 end
+
