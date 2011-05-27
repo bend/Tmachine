@@ -17,7 +17,7 @@ class Tape
 
 	def fillTape(init)
 		init.each_char do |e|
-			if alphabet.include? e
+			if alphabet.include? e.to_s
 				node = Node.new
 				node.setElem(e)
 				current.setNext(node)
@@ -30,7 +30,7 @@ class Tape
 	end
 
 	def putSymbol(s)
-		if alphabet.include? s
+		if alphabet.include? s.to_s
 			current.setElem(s)
 		else 
 			raise SymbolException.new( 'Symbol not in alphabet')

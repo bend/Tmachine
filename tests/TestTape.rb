@@ -6,7 +6,7 @@ require 'Tape.rb'
 $DEBUG = true
 #create the tape
 initState = "abcdef"
-t = Tape.new()
+t = Tape.new("abcdefghijklmnopqrstuvwxyzB10234567890-9-8-7-6-5-4-3-2-1-0-10")
 t.fillTape(initState)
 
 # Check that the Tape is filled
