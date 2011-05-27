@@ -2,7 +2,7 @@
 
 class Rules
 
-	attr_reader :rules
+	attr	:rules
 	
 	def initialize(r)
 		@rules = {}
@@ -15,17 +15,14 @@ class Rules
 
 private
 	
-	# |State|symbol||State|Sym|move
-	# Hash(State, Hash(symbol, Array[State,Sym,mode]))
-	# Rules are received with format array[State,Sym...]
 	def parseRules(r)
 		for i in 0..r.length do
 			if i%5 ==0	# State
-				state = r[i]
-				sym = r[i+1]
-				newState = r[i+2]
-				newSym = r[i+3]
-				move = r[i+4]
+				state = r[i].to_s
+				sym = r[i+1].to_s
+				newState = r[i+2].to_s
+				newSym = r[i+3].to_s
+				move = r[i+4].to_s
 				arr = []
 				arr[POS_STATE] = newState
 				arr[POS_SYM] = newSym

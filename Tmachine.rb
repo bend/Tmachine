@@ -4,30 +4,31 @@ require 'Rules.rb'
 require 'Global.rb'
 require 'Exception.rb'
 require 'Printer.rb'
-
+require 'Loader.rb'
 class Tmachine
 
-	attr_reader :alphabet
-	attr_reader :rules
-	attr_reader :tape
-	attr_reader :currentState
-	attr 		:printer
+	attr 	:currentState
+	attr 	:printer
+	attr	:loader
+	attr	:tape
+	attr	:theRules
 
-	def initialize(alphabet, initialState, r)
-		@alphabet= alphabet
+	def initialize(path)
 		@printer = Printer.new("/dev/stdout")
-		printer.print('Parsing rules\n',INFO)
-		@rules = Rules.new(r)
-		printer.print('Initializing tape',INFO)
-		@tape = Tape.new(alphabet)
-		printer.print('Filling tape',INFO)
+		printer.print("Loading file",INFO)
+			@loader = Loader.new(path)
+		printer.print("Parsing rules",INFO)
+		@theRules = Rules.new(loader.rules)
+		printer.print("Initializing tape",INFO)
+		@tape = Tape.new(loader.alphabet)
+		printer.print("Filling tape",INFO)
 		begin
-			tape.fillTape(initialState)
+			tape.fillTape(loader.tape)
 		rescue SymbolException 
-			printer.print('Symbol not in alphabet',WARNING)
+			printer.print("Symbol not in alphabet",WARNING)
 			exit
 		end
-		printer.print('Initial tape',STATUS)
+		printer.print("Initial tape",STATUS)
 		printer.print(tape.toString,TAPE)
 		@currentState = STATE_START
 	end
@@ -37,7 +38,7 @@ class Tmachine
 		while currentState != STATE_STOP
 			printer.print("Current state : "+currentState, STATUS)
 			printer.print("Reading Symbol: "+tape.getUnderCur,STATUS)
-			arr = rules.applyRule(currentState, tape.getUnderCur)
+			arr = theRules.applyRule(currentState, tape.getUnderCur)
 			if arr == nil 
 				printer.print("No rules found",WARNING)
 				printer.print("STOPPED ON ITERATION "+iter.to_s, WARNING)
@@ -66,8 +67,8 @@ class Tmachine
 			printer.print(tape.toString,TAPE)
 			iter+=1
 		end
-		printer.print("Final tape:",TAPE)
-		printer.print(tape.toString,Tape)
+		printer.print("Final tape:",STATUS)
+		printer.print(tape.toString,TAPE)
 		printer.print("Number of iterations: " + iter.to_s,STATUS)
 	end
 end

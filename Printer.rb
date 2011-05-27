@@ -22,7 +22,7 @@ class Printer
 			file.syswrite(str+"\n")
 		when TAPE
 			str.each do |e|
-			file.syswrite(e+ " | ")
+				file.syswrite(e+ " | ")
 			end
 			file.syswrite("\n")
 		end
