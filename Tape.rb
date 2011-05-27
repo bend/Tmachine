@@ -4,15 +4,17 @@ require 'Exception.rb'
 
 class Tape 
 
-	attr_accessor :current
-	attr_accessor :head
-	attr_reader	  :alphabet
+	attr_accessor 	:current
+	attr_accessor 	:head
+	attr_reader		:alphabet
+	attr_reader		:position
 
 	def initialize(alph)
 		@head= Node.new
 		head.setElem(EMPTY)
 		@current = head
 		@alphabet = alph
+		@position = 0
 	end
 
 	def fillTape(init)
@@ -40,11 +42,13 @@ class Tape
 	def leftMove
 		if current.prev != nil
 			@current = current.prev
+			@position-=1
 		else
 			node = Node.new
 			node.setNext(current)
 			@current = node
 			@head = current
+			@position = 0
 		end
 	end
 	
@@ -56,6 +60,7 @@ class Tape
 			node.setPrev(current)
 			@current = node
 		end
+		@position+=1
 	end
 
 	def getUnderCur
@@ -65,6 +70,7 @@ class Tape
 	def toString
 		cur = head.next
 		str_buf=[]
+		str_buf.push(position)
 		while cur != nil && cur.elem != nil
 			str_buf.push(cur.elem)
 			cur = cur.next

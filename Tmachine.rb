@@ -39,15 +39,15 @@ class Tmachine
 	end
 
 	def start()
-		iter = 0
+		transition = 0
 		while currentState != STATE_STOP
-			printer.print("Current state : "+currentState, STATUS)
+			printer.print("Current State : "+currentState, STATUS)
 			printer.print("Reading Symbol: "+tape.getUnderCur,STATUS)
 			arr = theRules.applyRule(currentState, tape.getUnderCur)
 
 			if arr == nil 
 				printer.print("No rules found",WARNING)
-				printer.print("STOPPED ON ITERATION "+iter.to_s, WARNING)
+				printer.print("STOPPED ON TRANSITION "+iter.to_s, WARNING)
 				printer.print("WITH STATE "+currentState,WARNING)
 				printer.print("WITH SYMBOL"+tape.getUnderCur,WARNING)
 				return
@@ -69,13 +69,13 @@ class Tmachine
 			when SHIFT_LEFT:
 				tape.leftMove
 			end
-			printer.print("Tape @iteration "+iter.to_s,STATUS)
+			printer.print("Tape on transition "+transition.to_s,STATUS)
 			printer.print(tape.toString,TAPE)
-			iter+=1
+			transition+=1
 		end
 		printer.print("Final tape:",STATUS)
 		printer.print(tape.toString,TAPE)
-		printer.print("Number of iterations: " + iter.to_s,STATUS)
+		printer.print("Number of transitions: " + transition.to_s,STATUS)
 	end
 end
 

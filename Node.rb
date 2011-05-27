@@ -1,4 +1,5 @@
 #!/usr/local/bin/ruby
+require 'Global.rb'
 
 class Node
 
@@ -11,7 +12,7 @@ public
 	def initialize
 		@next = nil
 		@prev = nil
-		@elem = 'B'
+		@elem = EMPTY
 	end
 
 	def setNext(node)

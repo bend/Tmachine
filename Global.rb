@@ -1,13 +1,15 @@
 #!/usr/local/bin/ruby
+#Change these values to fit your program
 # Symbol defs
-STATE_STOP		= 'STOP'
-STATE_START		= 'START'
-SHIFT_LEFT		= '<-'
-SHIFT_RIGHT		= '->'
+STATE_STOP		= 'H'
+STATE_START		= '1'
+SHIFT_LEFT		= '<'
+SHIFT_RIGHT		= '>'
 SHIFT_NONE		= '<>'
 
-EMPTY			= 'B'
+EMPTY			= '_'
 
+# Do not change value here
 # State pos def
 POS_STATE		= 0
 POS_SYM			= 1

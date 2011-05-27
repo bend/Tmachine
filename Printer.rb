@@ -21,10 +21,16 @@ class Printer
 			file.syswrite("FATAL: ")
 			file.syswrite(str+"\n")
 		when TAPE
+			pos = str[0]
+			str.shift
 			str.each do |e|
-				file.syswrite(e+ " | ")
+				file.syswrite(e.to_s+ "|")
 			end
 			file.syswrite("\n")
+			for i in 1..pos*2 do
+				file.syswrite(" ")
+			end
+			file.syswrite("^\n")
 		end
 	end
 
