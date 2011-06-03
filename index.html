@@ -1,80 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
+<meta charset='utf-8'>
 
-  <title>bend/Tmachine @ GitHub</title>
+<title>bend/Tmachine @ GitHub</title>
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #5c5155;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #a3aeaa; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #a3aeaa; }
-    h3 { text-align: center; color: #a3aeaa; }
-    a { color: #a3aeaa; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+<style type="text/css">
+body {
+	margin-top: 1.0em;
+	background-color: #5c5155;
+	font-family: Helvetica, Arial, FreeSans, san-serif;
+	color: #ffffff;
+}
+#container {
+	margin: 0 auto;
+	width: 700px;
+}
+h1 { font-size: 3.8em; color: #a3aeaa; margin-bottom: 3px; }
+h1 .small { font-size: 0.4em; }
+h1 a { text-decoration: none }
+h2 { font-size: 1.5em; color: #a3aeaa; }
+h3 { text-align: center; color: #a3aeaa; }
+a { color: #a3aeaa; }
+.description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+.download { float: right; }
+pre { background: #000; color: #fff; padding: 15px;}
+hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+.footer { text-align:center; padding-top:30px; font-style: italic; }
+</style>
 </head>
 
 <body>
-  <a href="http://github.com/bend/Tmachine"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<a href="http://github.com/bend/Tmachine"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+<div id="container">
 
-    <div class="download">
-      <a href="http://github.com/bend/Tmachine/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/bend/Tmachine/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+	<div class="download">
+		<a href="http://github.com/bend/Tmachine/zipball/master">
+			<img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+		<a href="http://github.com/bend/Tmachine/tarball/master">
+			<img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+	</div>
 
-    <h1><a href="http://github.com/bend/Tmachine">Tmachine</a>
-      <span class="small">by <a href="http://github.com/bend">bend</a></span></h1>
+	<h1><a href="http://github.com/bend/Tmachine">Tmachine</a>
+		<span class="small">by <a href="http://github.com/bend">bend</a></span></h1>
 
-    <div class="description">
-      A ruby written Turing machine
-    </div>
+	<div class="description">
+		A ruby written Turing machine
+	</div>
 
-    <h2>Authors</h2>
-<p>Bend (dbapps2@gmail.com)
-<br/>
-<br/>      </p>
-<h2>Contact</h2>
-<p>Ben (dbapps2@gmail.com)
-<br/>      </p>
+	<h2>Authors</h2>
+	<p>Bend (dbapps2@gmail.com)
+	<br/>
+	<br/>      </p>
+	<h2>Contact</h2>
+	<p>Ben (dbapps2@gmail.com)
+	<br/>      </p>
+	<h2>Description</h2>
+	<p>The program is built with multiple classes in order to make it more modular:</p> 
+	<ul> 
+		<li>The Tmachine class contains the code that do the transition</li> 
+		<li>The Tape class contains all the code related to the tape</li> 
+		<li>The Rule and Loader class contains the code for parsing the rules from the file and searching for the rules</li> 
+		<li>The Printer class deals with the prints and can print also in file.</li> 
+	</ul><h2>Usage</h2> 
 
+	<p>To use the machine type ruby main.rb [filename.tm]. The filename.tm will contain the code that the turing machine will interpret</p> 
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/bend/Tmachine/zipball/master">zip</a> or
-      <a href="http://github.com/bend/Tmachine/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/bend/Tmachine</pre>
-    </p>
+	<h2>Programming the Tmachine</h2> 
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/bend/Tmachine">bend/Tmachine</a>
-    </div>
+	<p>The Tmachine is really easy to program</p> 
 
-  </div>
+	<p>Create a file and put the rules, alphabet and the initial tape in it following this syntax</p> 
 
-  
+	<pre><code>    
+		TAPE=&gt;PUT_HERE_THE_INITIAL_TAPE
+		RULE=&gt;STATE SYMBOL NEWSTATE NEW SYMBOL MOVE
+		YOU CAN PUT AS MANY RULES AS YOU WISH
+		ALPH=&gt;PUT_HERE_THE_ALPHABET
+	</code></pre> 
+
+	<p>You can define the START STOP and movement symbols in Global.rb</p> 
+
+	<p>For examples see the examples folder.</p></div></div> 
+
+	<h2>Download</h2>
+	<p>
+	You can download this project in either
+	<a href="http://github.com/bend/Tmachine/zipball/master">zip</a> or
+	<a href="http://github.com/bend/Tmachine/tarball/master">tar</a> formats.
+	</p>
+	<p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+	by running:
+	<pre>$ git clone git://github.com/bend/Tmachine</pre>
+	</p>
+
+	<div class="footer">
+get the source code on GitHub : <a href="http://github.com/bend/Tmachine">bend/Tmachine</a>
+	</div>
+</div>
+
 </body>
 </html>
