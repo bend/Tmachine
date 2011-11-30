@@ -1,10 +1,11 @@
 #!/usr/local/bin/ruby
+$LOAD_PATH << './'
 require 'Tape.rb'
 require 'Rules.rb'
-require 'Global.rb'
 require 'Exception.rb'
 require 'Printer.rb'
 require 'Loader.rb'
+
 class Tmachine
 
 	attr 	:currentState
@@ -64,9 +65,9 @@ class Tmachine
 				exit
 			end
 			case arr[POS_MOVE]
-			when SHIFT_RIGHT:
-				tape.rightMove
-			when SHIFT_LEFT:
+            when SHIFT_RIGHT then
+                tape.rightMove
+            when SHIFT_LEFT then
 				tape.leftMove
 			end
 			printer.print("Tape on transition "+transition.to_s,STATUS)
