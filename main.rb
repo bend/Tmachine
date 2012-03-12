@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 $LOAD_PATH << '.'
 require 'Tmachine.rb'
 if ARGV.length>0

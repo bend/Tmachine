@@ -1,4 +1,3 @@
-#!/usr/local/bin/ruby
 #Change these values to fit your program
 # Symbol defs
 STATE_STOP		= 'H'

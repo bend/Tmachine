@@ -1,4 +1,3 @@
-#!/usr/local/bin/ruby
 $LOAD_PATH << './'
 require 'Global.rb'
 

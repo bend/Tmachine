@@ -1,4 +1,3 @@
-#!/usr/local/bin/ruby
 $LOAD_PATH << './'
 require 'Node.rb'
 require 'Exception.rb'

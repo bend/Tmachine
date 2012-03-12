@@ -1,5 +1,3 @@
-#!/usr/local/bin/ruby
-
 class SymbolException < Exception
 	attr :message
 	
